@@ -1,4 +1,4 @@
-# Adding two numbers 
+# Adding two numbers 12
 
 
 number1 = input("First number: ") 
