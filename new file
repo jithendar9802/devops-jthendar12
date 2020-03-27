@@ -1,0 +1,8 @@
+SELECT item FROM Orders 
+WHERE date ALL = (SELECT Order_ID FROM Orders
+WHERE quantity > 50)
+SELECT item -- single comment  
+FROM Orders -- another single comment
+WHERE id 
+ALL = (SELECT ID FROM Orders
+WHERE quantity > 25)
