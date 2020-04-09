@@ -1,0 +1,22 @@
+
+WEB SERVER CREATE IN LINUX MACHINE
+
+yum install -y httpd*
+systemctl start httpd
+system status httpd
+system enable httpd 
+
+////////////sometime need----4commands
+yum install -y firewalld*
+systemctl start firewalld
+systemctl status firewalld
+systemctl enable firewalld
+firewall-cmd --permanent --add-service=http
+ firewall-cmd --permanent --add-port=80/tcp
+firewall-cmd --reload
+vi /var/www/html/index.html
+////////if change in html page httpd must restart
+
+systemctl restart httpd
+
+ 
