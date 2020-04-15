@@ -139,6 +139,14 @@ docker run -it -p 1234:80 imagename
 docker exec cid /bin/bash
 
 
+   $$$$$$$$$ANSIBLE SETUP &&&&&&
+
+
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt update
+sudo apt install ansible
+
+
  
 
  
