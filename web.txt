@@ -1,0 +1,144 @@
+
+
+                     GIT HUB
+
+git push through linux machine
+
+git clone    git url 
+enter to git directory
+
+ 	git pull
+ 	git add .
+ 	git status
+ 	git commit "helloworld"
+ 	git commit -m  "helloworld"
+ 	git config --global user.email "jithendarre@gmail.com"
+ 	git config --global user.email "jithendarr9802"
+ 	git push    or 
+        git push origin master
+        git push origin branchname
+
+
+
+
+
+%%%%%%%%%%%%%%  WEB SERVER CREATE IN LINUX MACHINE%%%%%%%%%%%%
+
+yum install -y httpd*
+systemctl start httpd
+system status httpd
+system enable httpd 
+
+////////////sometime need----4commands
+yum install -y firewalld*
+systemctl start firewalld
+systemctl status firewalld
+systemctl enable firewalld
+firewall-cmd --permanent --add-service=http
+ firewall-cmd --permanent --add-port=80/tcp
+firewall-cmd --reload
+vi /var/www/html/index.html
+////////if change in html page httpd must restart
+systemctl restart httpd
+                          
+
+
+    			********jenkin*****
+
+
+                        JENKIN SETUP
+
+
+
+sudo yum -y install java-11-openjdk-devel
+java -version
+sudo vi /etc/profile.d/java.sh 
+
+press i below files copy and paste 
+
+export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))
+export PATH=$PATH:$JAVA_HOME/bin
+export JRE_HOME=/usr/lib/jvm/jre
+export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
+
+
+escape button :wq
+source /etc/profile.d/java.sh
+echo JAVA_HOME 
+
+
+jenkin setup
+
+sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum -y install wget
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+sudo yum -y install jenkins
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+systemctl status jenkins
+yum install -y firewalld*
+systemctl start firewalld
+systemctl status firewalld
+systemctl enable firewalld
+sudo firewall-cmd --add-port=8080/tcp --permanent
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-all
+ifconfig
+hostname
+cat (copy jenkin server url)
+final passward copy put it in jenkin server
+
+
+             ********DOCKER*******
+
+
+
+sudo apt-get install
+
+sudo apt-get install \    apt-transport-https \    ca-certificates \    curl \    gnupg-agent \    software-properties-common
+
+
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \   $(lsb_release -cs) \ stable"
+
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+docker --version
+docker run hello-world
+docker images
+docker pull ubuntu
+docker images
+docker run -it 4e5021d210f6
+docker ps
+docker exec -it 4d2c034d6015 "httpd-foreground"
+docker exec -it 4d2c034d6015 "/bin/bash"
+
+
+
+      ****DOCKER FILE FILE******
+
+
+ mkdir Dockerfile
+    ls
+    touch Dockerfile
+    vim Dockerfile
+    
+FROM centos:latest
+RUN yum -y install httpd
+COPY index.html /var/www/html/
+CMD [“/usr/sbin/httpd”, “-D”, “FOREGROUND”]
+EXPOSE 80
+docker build /root/reddy/ -t imagename:latest
+docker run -it -p 1234:80 imagename
+docker exec cid /bin/bash
+
+
+ 
+
+ 
