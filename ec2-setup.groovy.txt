@@ -1,0 +1,53 @@
+
+import hudson.model.*
+import jenkins.model.*
+import hudson.plugins.ec2.*
+import com.amazonaws.services.ec2.model.InstanceType
+  
+def instance = Jenkins.getInstance()
+
+def ec2_cloud_name = 'ec2-jenkins'
+def ec2_instance_cap = 5
+
+def worker_description = 'jenkins-worker'
+def worker_label_string = 'worker'
+
+def ami_id = 'ami-0c322300a1dd5dc79'
+def security_groups = 'launch-wizard-1'
+def subnet_id = 'subnet-248b7c42'
+def instance_type = 't2.micro'
+def instance_profile_arn = 'arn:aws:iam::123456789012:instance-profile/JenkinsInstanceProfile'
+
+def number_of_executors = 8
+
+def ec2_tags = [
+  new EC2Tag('Name', 'ec2-jenkins')
+]
+
+def priv_key_txt = '''
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAlZ/S6HpinsnFyrO5NrNMAwwe0k3UHp9c5ivwYKMZOdphVlHtD78KEk1bsiyd
+7XxcT+N0/sR007TbPGyNloYnM6ZvrAGi5dC6i3+uYimUmA1yh5Y9PRlyQci9xXa3EF6MMW0anniL
+m9aMcCnwkuS+EdvKKmbw8wKIyZzl3qN9ZnWfDpGrrS3CBrAg02uhke948h8GVWR3x+2R14wtONkO
+T3Tp8zvBjQZT8xpS1IV77DmBJ4dMWzvAuL01JJ+/6KBBJajDxS4ru4jc2TExF1irYe25hrH+6uQg
+AeXZLDusQQT7NpSaSTsF5vvklUUIP+EjcMmUNssWRGObw7LCNs65kQIDAQABAoIBAQCEwv6aR1XQ
+fUqilJwIHEma/psukd5gmZkNpvkwVifg/JOXyzPk3+co3Dk7vHkZK1qhjDrYgCsFWpmZYNy1Li4E
+l27JGd6XuoB7nPx3n1t5G51/D2EhIL4P/vXcC31d6fbNOHkBGgcObO3J7HzJamv4XqRgwVyU06/Z
+7PzOcxSm3uSg15g1Cg5Npq5mjuEceXrlJOx3Rq8XzT2RUmInFKZfY0rtGxFDrSdFH8PsSuRLCLnt
+f6Gjo5sTd4KGJQ1T8E1pkUsKPrcN7J6yTx7FQ4WgQiqWP62WiNFUt77tNeviRYqvyzwWfy90/Usm
+VGqmkBWrpF03EpUfHOqCVR6FtEx9AoGBANQ5kIYr+A2QJg3f7JoNCfICSuBEo+nPWgMcbzfzivXa
+l1TiN8MeFDi7ej5tMRVK/S6qrts3dR55YPIdHNexNJazqyQq5+BuDnBP62bYBq5L8tS/uR0oGBfd
+wn/j+rcLISTlPay6ntgIIcw582igvJ+pgBX3/DWEOAJbX+e8xcAPAoGBALR8qpMN0JBy6FGkykMk
+i2fD/JcZTQOFGg0y2ROR5vAnKnaWXd2ovfqBuacTbAwyjDdFfzTBlLDJv+C6DwAbpLtPqaIR6dbm
+9Ukx0jO5vBAzpfXMmgMpFVlM2brptt6XKXt03wJLEXviKwFG5fkv6zwoe0r+8cLbE8MlGgddGExf
+AoGAfT4LgGLqXHa5Pm7rnm4bdGrN7VQUt6LaqANbz1U2qKh7rmhiKA/UNzbMiZK+6KX8jFHGJzCv
+OXDAOaHcp524P0eAtDNt7BCHDNjdPzA1oR7JC6ypff9vWIZShk7wYp16zd9Lamgn3a3O5Es+znwt
+VLwfDtfuS1bgBuQN0SCiQxkCgYAU6pmt/xzbkKWByLI0A8kwFlNwg1scfFFflDP6A5+a1z8hjR2F
+saeKn3wPc73C0BzVzvUF/SUpM8hL1+QjJBD8MCg9gwvxfsSQXfi5S94Slpm2GacDlMBHoBNfiPRL
+aYNCLnIlxuNY0wYe2MOQFFCToTFgqJkF9vOcWvFgRxaoywKBgQDONI11E75Z3jGNoWek0RO0Xkt3
+wty7DqZmAUIuerHgn8sRg00uSBqbGntIt6n2t3P7DFAYQOlq7V0eY4FVsgLMmu8bBgnCI55I9dPh
+6wZ8j3Ppfv71EiGLg4Z86OxYUobB7LzcbIgXnA3xY0VqKJGNhZaCGB59nbF/+pZsUSbVIA==
+-----END RSA PRIVATE KEY-----
+'''
+
+  
