@@ -22,6 +22,7 @@ def number_of_executors = 8
 
 def ec2_tags = [
   new EC2Tag('Name', 'ec2-jenkins')
+  zone:   'us-east-1'
 ]
 
 def priv_key_txt = '''
